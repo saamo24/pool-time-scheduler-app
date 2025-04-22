@@ -1,73 +1,90 @@
-# Welcome to your Lovable project
 
-## Project info
+# Pool Time Scheduler API
 
-**URL**: https://lovable.dev/projects/02deb88c-fd13-42f9-b213-3e67a93ec2a2
+Backend API for managing swimming pool schedules, instructors, and visitors built with FastAPI.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **Role-based access control** (Administrator, Instructor, Visitor)
+- **Group management** with capacity constraints
+- **Instructor scheduling** with hour limits and preferences
+- **Visitor registrations** with gender-specific capacity limits
+- **REST API** with Swagger documentation
 
-**Use Lovable**
+## Requirements
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/02deb88c-fd13-42f9-b213-3e67a93ec2a2) and start prompting.
+- Python 3.8+
+- PostgreSQL
 
-Changes made via Lovable will be committed automatically to this repo.
+## Installation
 
-**Use your preferred IDE**
+1. Clone the repository
+2. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+3. Configure PostgreSQL connection in `app/core/config.py`
+4. Create tables and seed test data:
+   ```
+   python -m scripts.seed_data
+   ```
+5. Run the application:
+   ```
+   python run.py
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Docker Setup
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+The application can be run using Docker and docker-compose:
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+docker-compose up -d
 ```
 
-**Edit a file directly in GitHub**
+This will start both the PostgreSQL database and the API server.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## API Documentation
 
-**Use GitHub Codespaces**
+After starting the application, visit:
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Default Users
 
-## What technologies are used for this project?
+The seed script creates the following users:
 
-This project is built with:
+- **Admin**: 
+  - Email: admin@example.com
+  - Password: admin123
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Instructors**:
+  - Email: instructor1@example.com (through instructor5@example.com)
+  - Password: instructor1 (through instructor5)
 
-## How can I deploy this project?
+- **Visitors**:
+  - Email: visitor1@example.com (through visitor20@example.com)
+  - Password: visitor1 (through visitor20)
 
-Simply open [Lovable](https://lovable.dev/projects/02deb88c-fd13-42f9-b213-3e67a93ec2a2) and click on Share -> Publish.
+## API Endpoints
 
-## Can I connect a custom domain to my Lovable project?
+The API provides endpoints for:
 
-Yes, you can!
+- User management and authentication
+- Group creation and management
+- Instructor availability and preferences
+- Visitor registrations
+- Attendance tracking
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+For a complete list of endpoints, refer to the Swagger documentation.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Testing
+
+Basic tests can be run with:
+
+```
+pytest
+```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
